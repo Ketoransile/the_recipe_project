@@ -12,7 +12,13 @@ function Header() {
   return (
     <header className="header">
       <nav className="navbar">
-        <div className="navbar-brand">My Recipe Website</div>
+        <div className="navbar-brand">
+          <img
+            src="src\assets\cover.png"
+            alt="the recipe logo"
+            className="logo-image"
+          />
+        </div>
         <ul className="nav-links">
           <li>
             <a href="#home">Home</a>
