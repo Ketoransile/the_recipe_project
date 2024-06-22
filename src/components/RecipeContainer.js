@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RecipeCard from "./RecipeCard";
 import SearchBar from "./SearchBar";
+import "./RecipeContainer.css";
 
 function RecipeContainer() {
   const [recipes, setRecipes] = useState([]);
