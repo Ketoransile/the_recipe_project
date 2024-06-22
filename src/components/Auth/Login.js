@@ -34,7 +34,7 @@ const Login = () => {
           axios.post("http://localhost:9000/Login.php",values).then(
             (res)=>{
                 if(res['data']==="success"){
-              navigate('/');
+              navigate('/Ac');
             }
               else{
                 alert("please register first!");
