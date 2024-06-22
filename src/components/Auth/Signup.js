@@ -1,6 +1,53 @@
-import React from 'react'
+import "./Signup.css"
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate ,Link} from "react-router-dom";
+
 
 const Register = () => {
+
+  const [values, setValues] = useState({
+    firstName: "",
+    password: "",
+    email: ""
+  });
+  const navigate=useNavigate();
+
+
+  const handleInputChange = (event) => {
+    /* event.persist(); NO LONGER USED IN v.17*/
+    event.preventDefault();
+
+    const { name, value } = event.target;
+    setValues((values) => ({
+      ...values,
+      [name]: value
+    }));
+  };
+
+  const [submitted, setSubmitted] = useState(false);
+  const [valid, setValid] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (values.firstName && values.password && values.email) {
+      setValid(true);
+      axios.post("http://localhost:9000/Signup.php",values).then(
+        (res)=>{
+          if(res){
+            navigate('/Login');
+          }
+          else{
+            alert("incorrect signup!");
+          }
+          }
+      ).catch((err)=>{console.log(err)});
+    }
+    setSubmitted(true);
+  };
+
+
+
   return (
     <div className="form-container">
       <form className="register-form" onSubmit={handleSubmit}>
@@ -40,7 +87,7 @@ const Register = () => {
         )}
 
         {submitted && !values.password && (
-          <span id="last-name-error">Please enter a password</span>
+          <span id="password-error">Please enter a password</span>
         )}
 
         {!valid && (
@@ -63,6 +110,8 @@ const Register = () => {
           </button>
         )}
       </form>
+    <span className="linker-span">already have account <Link className="linker" to="/Login">Login</Link></span>
+
     </div>
 
   )
